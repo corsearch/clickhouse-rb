@@ -43,25 +43,28 @@ module Clickhouse
           values = array.each_with_index.to_a.collect do |value, i|
             parse_value(@types[i], value) if @types
           end
+
           ResultRow.new values, @names
         end
 
         def parse_value(type, value)
           if value
             case type
-            when "UInt8", "UInt16", "UInt32", "UInt64", "Int8", "Int16", "Int32", "Int64"
+            when 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Int8', 'Int16', 'Int32', 'Int64'
               parse_int_value value
-            when "Float32", "Float64"
+            when 'Float32', 'Float64'
               parse_float_value value
-            when "String", "Enum8", "Enum16"
+            when 'String', 'Enum8', 'Enum16'
               parse_string_value value
-            when /FixedString\(\d+\)/
-              parse_fixed_string_value value
-            when "Date"
+            when 'Date'
               parse_date_value value
-            when "DateTime"
+            when 'DateTime'
               parse_date_time_value value
-            when /Array\(/
+            when /^FixedString\(\d+\)/
+              parse_fixed_string_value value
+            when /^Nullable\(/
+              parse_value(type[/^Nullable\((?<type>.+)\)$/, 'type'], value) unless value.nil?
+            when /^Array\(/
               parse_array_value value
             else
               raise NotImplementedError, "Cannot parse value of type #{type.inspect}"

@@ -1,8 +1,6 @@
 module Clickhouse
   class Connection
     module Client
-      include ActiveSupport::NumberHelper
-
       def connect!
         ping! unless connected?
       end
@@ -37,7 +35,7 @@ module Clickhouse
     private
 
       def client
-        @client ||= Faraday.new(:url => url)
+        @client ||= Faraday.new(url: url)
       end
 
       def ensure_authentication
@@ -46,7 +44,7 @@ module Clickhouse
       end
 
       def path(query)
-        params = @config.select{|k, _v| k == :database}
+        params = @config.select { |k, _v| k == :database }
         params[:query] = query
         params[:output_format_write_statistics] = 1
         query_string = params.collect{|k, v| "#{k}=#{CGI.escape(v.to_s)}"}.join("&")
@@ -62,7 +60,7 @@ module Clickhouse
         response = client.send(method, path(query), body)
         status = response.status
         duration = Time.now - start
-        query, format = Utils.extract_format(query)
+        query, format = Utils.extract_format(query.nil? || query.empty? ? body : query)
         response = parse_body(format, response.body)
         stats = parse_stats(response)
 
@@ -90,10 +88,10 @@ module Clickhouse
         factor = 1 / stats["elapsed"]
 
         stats["elapsed"] = number_to_human_duration(stats["elapsed"])
-        stats["rows_per_second"] = number_to_human(stats["rows_read"] * factor, options).downcase
-        stats["data_per_second"] = number_to_human_size(stats["bytes_read"] * factor, options)
-        stats["rows_read"] = number_to_human(stats["rows_read"], options).downcase
-        stats["data_read"] = number_to_human_size(stats["bytes_read"], options)
+        stats["rows_per_second"] = stats["rows_read"] * factor
+        stats["data_per_second"] = stats["bytes_read"] * factor
+        stats["rows_read"] = stats["rows_read"]
+        stats["data_read"] = stats["bytes_read"]
 
         stats
       end

@@ -1,4 +1,4 @@
-# Clickhouse [![Build Status](https://travis-ci.org/archan937/clickhouse.svg?branch=master)](https://travis-ci.org/archan937/clickhouse) [![Code Climate](https://codeclimate.com/github/archan937/clickhouse/badges/gpa.svg)](https://codeclimate.com/github/archan937/clickhouse) [![Test Coverage](https://codeclimate.com/github/archan937/clickhouse/badges/coverage.svg)](https://codeclimate.com/github/archan937/clickhouse/coverage) [![Gem](https://img.shields.io/gem/v/clickhouse.svg)](https://rubygems.org/gems/clickhouse) [![Gem](https://img.shields.io/gem/dt/clickhouse.svg)](https://rubygems.org/gems/clickhouse)
+# Clickhouse
 
 A Ruby database driver for ClickHouse (also Clickhouse CLI and web GUI included).
 
@@ -10,7 +10,6 @@ A Ruby database driver for ClickHouse (also Clickhouse CLI and web GUI included)
 
 On June 15th 2016, [Yandex open-sourced their awesome project](https://news.ycombinator.com/item?id=11908254) giving the community a [powerful asset](https://clickhouse.yandex/benchmark.html) which can compete with the big players like [Google BigQuery](https://cloud.google.com/bigquery/) and [Amazon Redshift](http://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html) with an important advantage: the client can use ClickHouse in its infrastructure and does not have to pay for the cloud ([read more](https://translate.google.com/translate?sl=ru&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=https://habrahabr.ru/company/yandex/blog/303282/)).
 
-![Using the Sinatra-based Clickhouse client web GUI](http://res.cloudinary.com/archan937/video/upload/c_scale,q_100,vc_h264:high,w_800/v1478425941/clickhouse.gif)
 
 ### Why use the HTTP interface and not the TCP interface?
 
@@ -29,18 +28,18 @@ Despite of it being the most efficient format, using the native format is also [
 
 ## Installation
 
-Run the following command to install `Clickhouse`:
+Run the following command to install `clickhouse-rb`:
 
-    $ gem install "clickhouse"
+    $ gem install "clickhouse-rb"
 
 ## Usage
 
 ### Quick start
 
-Require the Clickhouse gem.
+Require the ClickHouse gem.
 
 ```ruby
-require "clickhouse"
+require 'clickhouse-rb'
 ```
 
 Setup the logging output.
@@ -186,38 +185,11 @@ If all the connections failed, it will just return `nil`.
 
 ### Check out the tests
 
-To see what more the `Clickhouse` gem has to offer, please take a look at the unit tests ( [test/unit/connection/test_query.rb](https://github.com/archan937/clickhouse/blob/master/test/unit/connection/test_query.rb) for instance).
-
-## Using the Sinatra-based browser GUI and Thor-based CLI
-
-As of `Clickhouse v0.1.8`, the gem is provided with both a Sinatra-based GUI and a Thor-based CLI. Starting either of them is very easy:
-
-* `clickhouse s localhost:8123` - (the `s` stands for server as we know from `rails s`)
-* `clickhouse c localhost:8123` - (the `c` stands for console as we know from `rails c`)
-
-Multiple connections should be passed comma separated:
-
-`clickhouse s https://myserver.com:8123,https://myserver.com:8124`
-
-Use `clickhouse help` to:
-
-```
-$ clickhouse help server
-Usage:
-  clickhouse server [HOSTS]
-
-Options:
-  -p, [--port=N]
-                             # Default: 1982
-  -u, [--username=USERNAME]
-  -P, [--password=PASSWORD]
-
-Start a Sinatra server as ClickHouse client (HOSTS should be comma separated URIs)
-```
+To see what more the `Clickhouse` gem has to offer, please take a look at the unit tests ( [test/unit/connection/test_query.rb](./blob/master/test/unit/connection/test_query.rb) for instance).
 
 ## Using the console
 
-As you probably already noticed, the `Clickhouse` repo is provided with a `script/console` file which you can use for development / testing purposes. Please note that you need to have a ClickHouse server running.
+As you probably already noticed, the `clickhouse-rb` repo is provided with a `script/console` file which you can use for development / testing purposes. Please note that you need to have a ClickHouse server running.
 
 ### Running a ClickHouse server on your Mac or Windows computer
 
@@ -252,15 +224,11 @@ You can also run a single test file:
 
     $ ruby test/unit/connection/test_query.rb
 
-## Contact me
-
-For support, remarks and requests, please mail me at [pm_engel@icloud.com](mailto:pm_engel@icloud.com).
-
 ## License
 
-Copyright (c) 2016 Paul Engel, released under the MIT license
+Released under MIT License
 
-http://github.com/archan937 – http://twitter.com/archan937 – pm_engel@icloud.com
+Copyright 2019 Marketly
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

@@ -7,7 +7,6 @@ require "time"
 require "faraday"
 require "pond"
 require "active_support/dependencies/autoload"
-require "active_support/number_helper"
 require "active_support/core_ext/string/inflections"
 
 require "clickhouse/cluster"

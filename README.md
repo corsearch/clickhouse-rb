@@ -1,6 +1,6 @@
-# Clickhouse
+# clickhouse-rb
 
-A Ruby database driver for ClickHouse (also Clickhouse CLI and web GUI included).
+A Ruby database driver for ClickHouse.
 
 ## Introduction
 
@@ -30,7 +30,9 @@ Despite of it being the most efficient format, using the native format is also [
 
 Run the following command to install `clickhouse-rb`:
 
-    $ gem install "clickhouse-rb"
+```bash
+$ gem install 'clickhouse-rb'
+```
 
 ## Usage
 
@@ -151,7 +153,7 @@ GROUP BY year, date;
 
 ### Connecting to a cluster
 
-To connect to a cluster you only need to specify the URLs of the cluster servers in `:urls` of the configuration and that is it! The API of using Clickhouse stays the same.
+To connect to a cluster you only need to specify the URLs of the cluster servers in `:urls` of the configuration and that is it! The API of using `clickhouse-rb` stays the same.
 
 ```ruby
 Clickhouse.establish_connection urls: %w(http://192.168.99.100:32809 http://192.168.99.100:32812 http://192.168.99.100:32815)
@@ -163,7 +165,7 @@ I, [2016-10-21T11:56:47.375772 #63374]  INFO -- :
 => ["events"]
 ```
 
-In case of a connection dropping out, Clickhouse will retry the request with another connection. The failed connection will also be removed from the connection pool.
+In case of a connection dropping out, `clickhouse-rb` will retry the request with another connection. The failed connection will also be removed from the connection pool.
 
 ```ruby
 Clickhouse.establish_connection urls: %w(http://192.168.99.100:32809 http://192.168.99.100:1 http://192.168.99.100:32815)
@@ -185,7 +187,7 @@ If all the connections failed, it will just return `nil`.
 
 ### Check out the tests
 
-To see what more the `Clickhouse` gem has to offer, please take a look at the unit tests ( [test/unit/connection/test_query.rb](./blob/master/test/unit/connection/test_query.rb) for instance).
+To explore further functionality of the `clickhouse-rb` gem, review the [unit tests](./test/unit/connection/test_query.rb).
 
 ## Using the console
 

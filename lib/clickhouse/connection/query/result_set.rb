@@ -89,17 +89,18 @@ module Clickhouse
         end
 
         def parse_date_value(value)
-          Date.parse(value)
+          # NOTE: this treats the default value as `NULL`
+          Date.parse(value) unless value == '0000-00-00'
         end
 
         def parse_date_time_value(value)
-          Time.parse(value)
+          # NOTE: this treats the default value as `NULL`
+          Time.parse(value) unless value == '0000-00-00 00:00:00'
         end
 
         def parse_array_value(value)
           value
         end
-
       end
     end
   end

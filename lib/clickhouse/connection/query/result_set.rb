@@ -64,6 +64,8 @@ module Clickhouse
               parse_fixed_string_value value
             when /^Nullable\(/
               parse_value(type[/^Nullable\((?<type>.+)\)$/, 'type'], value) unless value.nil?
+            when /^LowCardinality\(/
+              parse_value(type[/^LowCardinality\((?<type>.+)\)$/, 'type'], value) unless value.nil?
             when /^Array\(/
               parse_array_value value
             else

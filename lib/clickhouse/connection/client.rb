@@ -35,7 +35,9 @@ module Clickhouse
     private
 
       def client
-        @client ||= Faraday.new(url: url)
+        @client ||= Faraday.new(url: url, request: {
+          timeout: (@config[:timeout] || 60)
+        })
       end
 
       def ensure_authentication
